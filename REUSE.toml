@@ -1,0 +1,23 @@
+version = 1
+
+# Code is LGPL-3.0-only, the suite's own prose is CC BY 4.0, and whatever is not the suite's own
+# keeps the licence it came with (ADR-0001). The last annotation matching a file wins, so the
+# general rules come first and the exceptions after them.
+
+# Code, and the files a program reads as instructions.
+[[annotations]]
+path = [".gitignore", ".github/**", ".claude/hooks/**", ".claude/settings.json"]
+SPDX-FileCopyrightText = "2026 5thlayer"
+SPDX-License-Identifier = "LGPL-3.0-only"
+
+# The suite's own prose: the glossary, ADRs, docs and READMEs.
+[[annotations]]
+path = ["**/*.md"]
+SPDX-FileCopyrightText = "2026 5thlayer"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# The agent skills, from mattpocock/skills.
+[[annotations]]
+path = [".agents/**", ".claude/skills", ".gitmodules"]
+SPDX-FileCopyrightText = "Matt Pocock"
+SPDX-License-Identifier = "MIT"

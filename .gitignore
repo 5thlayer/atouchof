@@ -1,0 +1,9 @@
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode
+*.code-workspace
+
+# Agent worktrees: a `git add -A` from the root would commit every session's copy.
+.claude/worktrees/
