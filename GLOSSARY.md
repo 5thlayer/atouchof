@@ -1,8 +1,9 @@
 # A Touch Of
 
 A suite of Minecraft 26.1.2 / NeoForge survival mods that brings Don't Starve's pressure (darkness,
-madness and cold) into an ordinary world. Don't Starve is the reference for feel, never
-for numbers, names or art.
+madness and cold) into an ordinary world, with an occult touch: what threatens the player and what
+helps them against it is bound, summoned or kindled more than machined. Don't Starve is the
+reference for feel, never for numbers, names or art.
 
 ## The suite
 
