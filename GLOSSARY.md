@@ -41,9 +41,14 @@ _Avoid_: Sanity value
 
 **Dark**:
 The state of a player whose position is not lit by enough vanilla light. Past a grace period
-something unseen strikes for heavy damage, again and again until the player reaches light, in
-caves as on the surface; a full moon counts as lit.
+the Babau strikes for heavy damage, again and again until the player reaches light, in caves as
+on the surface; a full moon counts as lit.
 _Avoid_: Darkness (vanilla's Warden status effect)
+
+**Babau**:
+The one being of Italian folklore that lives in the Dark and strikes whoever stays there too long;
+never seen, only felt.
+_Avoid_: Bogeyman, Charlie (Klei's name), grue, the Dark (the state it lives in), monster
 
 **Light Source**:
 A block or carried item that lights its surroundings for the Dark. Every one runs on fuel or
