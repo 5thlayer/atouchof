@@ -3,12 +3,13 @@
 
 package io.github._5thlayer.atouchof;
 
+import io.github._5thlayer.atouchof.meter.MeterSync;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
 /**
- * The Runtime's entry point. A Pillar nests this jar, and FML loads the newest nested copy once. The
- * game tests hook themselves in from the
+ * The Runtime's entry point. A Pillar nests this jar, and FML loads the newest nested copy once. It
+ * syncs and draws the Pillars' meters (ADR-0005). The game tests hook themselves in from the
  * {@code gametest} source set, which never ships (libworks ADR 0011).
  */
 @Mod(ATouchOf.MOD_ID)
@@ -18,5 +19,6 @@ public final class ATouchOf {
     public static final String MOD_ID = "atouchof";
 
     public ATouchOf(IEventBus modBus) {
+        MeterSync.register(modBus);
     }
 }

@@ -12,6 +12,15 @@ The small shared mod every Pillar nests, which arranges and draws the Pillars' m
 mechanic of its own (ADR-0002).
 _Avoid_: Core, base mod
 
+**Meter**:
+What the Runtime draws for a Pillar's stat: a row of ten icons in half steps, in the sprites of the
+state the Pillar sets, with chevrons for its Trend Band. The stat stays the Pillar's (ADR-0005).
+_Avoid_: bar, gauge
+
+**Trend Band**:
+How fast a Meter is moving, as its Pillar works it out from its own rate: −3 to +3, drawn as that
+many chevrons, up or down, and none at 0.
+
 **Pillar**:
 One of the suite's mods, each owning one survival danger and playable alone in vanilla: A Touch of
 Darkness, A Touch of Madness and A Touch of Wickedness. A Touch of Cold is shelved, and cold and

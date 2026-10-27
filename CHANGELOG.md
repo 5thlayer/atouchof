@@ -1,0 +1,7 @@
+# Changelog
+
+Written for the Pillars: what a Pillar nesting the Runtime can use, or will see change. A published version never changes: a fix is the next patch (`docs/agents/releases.md`).
+
+## Unreleased
+
+- The Runtime, mod `atouchof`, which a Pillar nests jar-in-jar, and its meters. A Pillar registers a meter from its mod constructor with `Meter.register(id, max, states...)`, each `MeterState` naming the Pillar's own full, half and empty GUI sprites, and sets it each tick per player with `meter.set(player, value, state, trend)`, the trend band from −3 to +3. The server tells only that player's client, in the `atouchof:meter` payload, and only when the row it draws changes. The client draws each meter as a row of ten icons in half steps, like vanilla's food bar: on the right, above the food bar and below the air bubbles, stacked in the order of the meters' ids, with one to three chevrons right of the row, up or down, for the trend. A meter shows only when vanilla's survival bars do (#9).
