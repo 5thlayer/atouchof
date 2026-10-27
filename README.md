@@ -11,7 +11,11 @@ of Don't Starve.
 - **A Touch of Darkness**: the Dark strikes anyone who stays unlit, and every light burns out.
   It comes first.
 - **A Touch of Madness**: Sanity, Shadow Creatures that only the mad can see, and Umbra.
-- **A Touch of Cold**: Body Temperature, from Cold to Overheating.
+- **A Touch of Wickedness**: killing harmless creatures builds Wickedness, and too much of it
+  brings the Bailiff to seize your goods.
+
+Cold and heat are left to [Tough As Nails](https://modrinth.com/mod/tough-as-nails), which the suite
+recommends and no Pillar requires; A Touch of Cold is shelved.
 
 No Pillar requires another. Together they meet in vanilla state: the Dark drains Sanity because
 Madness reads light level, not because the two mods know each other.
