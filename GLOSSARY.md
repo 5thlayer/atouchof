@@ -8,8 +8,8 @@ reference for feel, never for numbers, names or art.
 ## The suite
 
 **Runtime**:
-The small shared mod every Pillar nests, which arranges and draws the Pillars' meters and holds no
-mechanic of its own (ADR-0002).
+The small shared mod every Pillar nests, which arranges and draws the Pillars' meters, carries
+their Signals, and holds no mechanic of its own (ADR-0002).
 _Avoid_: Core, base mod
 
 **Meter**:
@@ -20,6 +20,11 @@ _Avoid_: bar, gauge
 **Trend Band**:
 How fast a Meter is moving, as its Pillar works it out from its own rate: −3 to +3, drawn as that
 many chevrons, up or down, and none at 0.
+
+**Signal**:
+What the Runtime carries from one Pillar to any other: that something happened to a player, such
+as a Strike, and nothing about what it costs, which each listener decides (ADR-0004).
+_Avoid_: hook, callback
 
 **Pillar**:
 One of the suite's mods, each owning one survival danger and playable alone in vanilla: A Touch of

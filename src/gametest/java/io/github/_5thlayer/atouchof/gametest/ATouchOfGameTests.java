@@ -61,6 +61,7 @@ public final class ATouchOfGameTests {
     private static void registerTests(RegisterGameTestsEvent event) {
         var tests = new Registrar(event, event.registerEnvironment(id("default"), new TestEnvironmentDefinition.AllOf(List.of())));
         MeterSyncTests.register(tests);
+        StrikeTests.register(tests);
     }
 
     static Identifier id(String path) {

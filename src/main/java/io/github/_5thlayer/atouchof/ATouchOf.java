@@ -9,7 +9,8 @@ import net.neoforged.fml.common.Mod;
 
 /**
  * The Runtime's entry point. A Pillar nests this jar, and FML loads the newest nested copy once. It
- * syncs and draws the Pillars' meters (ADR-0005). The game tests hook themselves in from the
+ * syncs and draws the Pillars' meters (ADR-0005), and carries their signals, such as the
+ * {@link io.github._5thlayer.atouchof.signal.Strike}, on the game bus (ADR-0004). The game tests hook themselves in from the
  * {@code gametest} source set, which never ships (libworks ADR 0011).
  */
 @Mod(ATouchOf.MOD_ID)

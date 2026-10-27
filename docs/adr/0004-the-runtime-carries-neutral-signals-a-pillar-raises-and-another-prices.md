@@ -1,5 +1,5 @@
 ---
-status: provisional
+status: accepted
 ---
 
 # The Runtime carries neutral signals that one Pillar raises and another prices
