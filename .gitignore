@@ -7,3 +7,11 @@
 
 # Agent worktrees: a `git add -A` from the root would commit every session's copy.
 .claude/worktrees/
+
+# The Runtime's build, at any depth so a subproject's output is covered too.
+.gradle/
+build/
+run/
+logs/
+/.idea/
+__pycache__/

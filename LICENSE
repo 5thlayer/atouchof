@@ -1,0 +1,7 @@
+A Touch Of is licensed per file (ADR-0001, after FactoryWorks ADR-0102):
+
+- Code, and the files a program reads as instructions, are LGPL-3.0-only (LICENSES/LGPL-3.0-only.txt): the Runtime's Java sources, the build, `mise.toml`, `.gitignore`, the workflows, `.claude/hooks`, `.claude/settings.json` and `neoforge.mods.toml`.
+- The suite's own content and prose are CC BY 4.0 (LICENSES/CC-BY-4.0.txt): docs, the glossary, the ADRs, and the Runtime's resource files.
+- The release tooling copied from the 5thlayer/libworks template (`publish/upload.env`) and the vendored agent skills keep the licence they came with (LICENSES/MIT.txt). The Gradle wrapper is Gradle's (LICENSES/Apache-2.0.txt).
+
+REUSE.toml says which licence covers which file.

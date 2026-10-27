@@ -1,0 +1,16 @@
+# Builds and tests every push through the CI every Module shares, at the tag of the plugin
+# build.gradle applies: the two versions move together (libworks ADR 0003). It never publishes:
+# the Runtime's jar reaches a Pillar only through ~/.m2 (docs/agents/releases.md).
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: 5thlayer/libworks/.github/workflows/module-ci.yml@plugin-v0.4.5

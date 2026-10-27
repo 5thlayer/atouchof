@@ -27,6 +27,7 @@ and the parent issue of every cross-Pillar topic.
 
 - The vocabulary is in [GLOSSARY.md](GLOSSARY.md), and the decisions are in [docs/adr](docs/adr).
 - A bug or idea for one Pillar goes on that Pillar's tracker. One that spans several goes here.
+- The Runtime, `atouchof`, the small mod every Pillar nests, is built here, from the repo root.
 
 ## Licence
 

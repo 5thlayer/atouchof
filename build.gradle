@@ -1,0 +1,10 @@
+// The Runtime's build, every piece of it from the libworks convention plugin (libworks ADR 0003):
+// ModDevGradle on Java 25, the game test server that names each test, the jar's licensing, ~/.m2-only
+// publishing, and the release, upload and buildGametestStructures tasks.
+plugins {
+    id 'io.github.5thlayer.libworks.module' version '0.4.5'
+}
+
+// The Runtime requires no other Module and nests nothing: it is what the Pillars nest (ADR-0002).
+libworks {
+}
