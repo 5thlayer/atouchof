@@ -46,15 +46,19 @@ _Avoid_: Sanity value
 ## Darkness
 
 **Dark**:
-The state of a player whose position is not lit by enough vanilla light, below 5 (ADR-0003). Past a grace period
-something unseen strikes for heavy damage, again and again until the player reaches light, in
-caves as on the surface; a full moon counts as lit.
+The state of a player whose position is not lit by enough vanilla light, below 5 (ADR-0003). Past
+a grace period the Babau strikes for heavy damage, again and again until the player reaches light,
+in caves as on the surface; a full moon counts as lit.
 _Avoid_: Darkness (vanilla's Warden status effect)
 
+**Babau**:
+The one being of Italian folklore that lives in the Dark and strikes whoever stays there too long;
+never seen, only felt.
+_Avoid_: Bogeyman, Charlie (Klei's name), grue, the Dark (the state it lives in), monster
+
 **Strike**:
-One blow from what lurks in the Dark, repeated while the player stays there. It raises the
-Runtime's Strike signal on every difficulty, Peaceful included, so another Pillar can price it
-(ADR-0004).
+One blow from the Babau, repeated while the player stays in the Dark. It raises the Runtime's
+Strike signal on every difficulty, Peaceful included, so another Pillar can price it (ADR-0004).
 _Avoid_: attack, hit
 
 **Light Source**:
