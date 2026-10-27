@@ -21,6 +21,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 /**
  * The meters' sync: the server tells each player's client what each meter shows them, in a
  * {@link MeterPayload}, whenever it changes from what that client was last told, and never anyone else.
+ * The Runtime's own wiring: a Pillar needs only {@link Meter}.
  */
 public final class MeterSync {
 

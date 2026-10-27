@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.mojang.authlib.GameProfile;
 import io.github._5thlayer.atouchof.meter.Meter;
 import io.github._5thlayer.atouchof.meter.MeterPayload;
 import io.github._5thlayer.atouchof.meter.MeterState;
@@ -113,7 +114,7 @@ final class MeterSyncTests {
         return join(helper, TestPlayers.profile());
     }
 
-    private static ServerPlayer join(GameTestHelper helper, com.mojang.authlib.GameProfile profile) {
+    private static ServerPlayer join(GameTestHelper helper, GameProfile profile) {
         var player = TestPlayers.join(helper, profile);
         TestPlayers.whenDone(helper, () -> {
             TestPlayers.leave(helper, profile);

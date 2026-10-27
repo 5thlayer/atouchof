@@ -4,6 +4,7 @@
 package io.github._5thlayer.atouchof.meter;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -18,15 +19,15 @@ import net.minecraft.server.level.ServerPlayer;
  * Runtime only receives what the meter shows, and computes nothing from it (ADR-0002).
  *
  * <p>A Pillar registers its meter while the mods are constructed, on both sides, so each client knows
- * its sprites, and sets it each tick for each player, on the server.
+ * its sprites, and sets it each tick for each player, on the server thread.
  */
 public final class Meter {
 
     /** The lowest and highest trend band. */
     public static final int TREND_LIMIT = 3;
 
-    /** Every meter, by id, in the order the client stacks them. */
-    private static final Map<Identifier, Meter> METERS = new ConcurrentSkipListMap<>();
+    /** Every meter, by id, in the order the client stacks them: by namespace, then path, where Identifier's own order takes the path first. */
+    private static final Map<Identifier, Meter> METERS = new ConcurrentSkipListMap<>(Comparator.comparing(Identifier::toString));
 
     private static volatile boolean closed;
 
@@ -42,7 +43,7 @@ public final class Meter {
 
     /**
      * Registers a meter, from a Pillar's mod constructor. Several Pillars' meters stack above vanilla's
-     * food bar in the order of their ids.
+     * food bar in the order of their ids, as {@code namespace:path} strings.
      *
      * @param id     the meter's id, in the Pillar's namespace
      * @param max    the value that fills the row
@@ -90,17 +91,8 @@ public final class Meter {
         return id;
     }
 
-    public float max() {
-        return max;
-    }
-
     public List<MeterState> states() {
         return states;
-    }
-
-    /** The meter registered under this id, or null. */
-    static Meter byId(Identifier id) {
-        return METERS.get(id);
     }
 
     /** Every meter, in the order the client stacks them. */

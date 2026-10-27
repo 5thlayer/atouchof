@@ -37,8 +37,13 @@ final class MeterRow {
         return place * 2 + 1 == halves ? Icon.HALF : Icon.EMPTY;
     }
 
-    /** The chevrons a trend band draws, pointing up for a positive band and down for a negative one. */
+    /** The chevrons a trend band draws, at most {@value Meter#TREND_LIMIT}. */
     static int chevrons(int trend) {
-        return Math.abs(trend);
+        return Math.min(Math.abs(trend), Meter.TREND_LIMIT);
+    }
+
+    /** Whether a trend band's chevrons point up, as a positive band's do, or down. */
+    static boolean pointsUp(int trend) {
+        return trend > 0;
     }
 }

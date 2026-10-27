@@ -86,7 +86,7 @@ final class MeterHud {
 
     /** The trend's chevrons, just right of the row, outside vanilla's column so they cover no icon. */
     private static void drawChevrons(GuiGraphicsExtractor graphics, int trend, int xRight, int y) {
-        var sprite = trend > 0 ? CHEVRON_UP : CHEVRON_DOWN;
+        var sprite = MeterRow.pointsUp(trend) ? CHEVRON_UP : CHEVRON_DOWN;
         var top = y + (ICON - CHEVRON_HEIGHT) / 2;
         for (var i = 0; i < MeterRow.chevrons(trend); i++) {
             graphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, xRight + 1 + i * CHEVRON_STEP, top, CHEVRON_WIDTH, CHEVRON_HEIGHT);

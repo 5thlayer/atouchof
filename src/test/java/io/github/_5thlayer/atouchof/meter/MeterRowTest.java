@@ -71,6 +71,19 @@ class MeterRowTest {
         assertEquals(chevrons, MeterRow.chevrons(trend));
     }
 
+    @ParameterizedTest
+    @CsvSource({"-3, false", "-1, false", "1, true", "3, true"})
+    void aPositiveBandPointsUpAndANegativeOneDown(int trend, boolean up) {
+        assertEquals(up, MeterRow.pointsUp(trend));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"-9, 3", "4, 3"})
+    void aBandOutOfRangeDrawsNoMoreThanThreeChevrons(int trend, int chevrons) {
+        // A newer server's band, which this client can't place.
+        assertEquals(chevrons, MeterRow.chevrons(trend));
+    }
+
     private static List<Icon> row(int halves) {
         var icons = new ArrayList<Icon>();
         for (var place = 0; place < MeterRow.ICONS; place++) {
