@@ -54,6 +54,7 @@ final class DiscoveryTests {
         tests.test("discovery_tells_only_its_player", 20, DiscoveryTests::tellsOnlyItsPlayer);
         tests.test("discovery_tells_again_after_a_relog", 20, DiscoveryTests::tellsAgainAfterARelog);
         tests.test("discovery_switched_off_tells_everything_known", 20, DiscoveryTests::switchedOff);
+        tests.test("discovery_tells_again_on_a_datapack_reload", 20, DiscoveryTests::tellsAgainOnADatapackReload);
         tests.test("discovery_refuses_a_thing_it_does_not_have", 20, DiscoveryTests::refusesAnUnknownThing);
         tests.test("discovery_refuses_a_registration_once_the_mods_are_set_up", 20, DiscoveryTests::refusesALateRegistration);
     }
@@ -114,6 +115,20 @@ final class DiscoveryTests {
             switchedOn = false;
         }
         switched.retell();
+        expectSent(helper, player, switched, List.of(Set.of("seen"), Set.of(), Set.of("seen")));
+        helper.succeed();
+    }
+
+    private static void tellsAgainOnADatapackReload(GameTestHelper helper) {
+        var player = join(helper);
+        var players = helper.getLevel().getServer().getPlayerList();
+        switchedOn = true;
+        try {
+            players.reloadResources();
+        } finally {
+            switchedOn = false;
+        }
+        players.reloadResources();
         expectSent(helper, player, switched, List.of(Set.of("seen"), Set.of(), Set.of("seen")));
         helper.succeed();
     }

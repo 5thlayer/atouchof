@@ -128,11 +128,6 @@ public final class Discovery {
         return namespace;
     }
 
-    /** Every discoverable thing's id. */
-    public Set<String> ids() {
-        return ids;
-    }
-
     /**
      * Tells every player's client what is known again, where it changed, as the Runtime does on a reload
      * of the Pillar's config. A Pillar calls it when its Discovery is switched on or off some other way.
