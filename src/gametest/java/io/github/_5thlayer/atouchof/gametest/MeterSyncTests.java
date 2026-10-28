@@ -48,8 +48,8 @@ final class MeterSyncTests {
                 SENT.computeIfAbsent(player.getUUID(), id -> new ArrayList<>()).add(payload);
             }
         });
-        MeterSync.onClear((player, cleared) -> {
-            if (cleared.equals(meter.id())) {
+        MeterSync.onClear((player, id) -> {
+            if (id.equals(meter.id())) {
                 CLEARED.merge(player.getUUID(), 1, Integer::sum);
             }
         });
@@ -104,12 +104,12 @@ final class MeterSyncTests {
     }
 
     private static void clearsFromItsPlayerOnly(GameTestHelper helper) {
-        var cleared = join(helper);
+        var target = join(helper);
         var other = join(helper);
-        meter.set(cleared, 50, 0, 0);
+        meter.set(target, 50, 0, 0);
         meter.set(other, 50, 0, 0);
-        meter.clear(cleared);
-        expectCleared(helper, cleared, 1);
+        meter.clear(target);
+        expectCleared(helper, target, 1);
         expectCleared(helper, other, 0);
         helper.succeed();
     }
@@ -178,9 +178,9 @@ final class MeterSyncTests {
     }
 
     private static void expectCleared(GameTestHelper helper, ServerPlayer player, int expected) {
-        var cleared = CLEARED.getOrDefault(player.getUUID(), 0);
-        if (cleared != expected) {
-            helper.fail("cleared " + cleared + " times, expected " + expected);
+        var times = CLEARED.getOrDefault(player.getUUID(), 0);
+        if (times != expected) {
+            helper.fail("cleared " + times + " times, expected " + expected);
         }
     }
 

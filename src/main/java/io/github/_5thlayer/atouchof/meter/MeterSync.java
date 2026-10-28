@@ -36,9 +36,13 @@ public final class MeterSync {
     }
 
     public static void register(IEventBus modBus) {
-        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> event.registrar("1")
-                .playToClient(MeterPayload.TYPE, MeterPayload.STREAM_CODEC, (payload, context) -> ClientMeters.told(payload))
-                .playToClient(MeterClearPayload.TYPE, MeterClearPayload.STREAM_CODEC, (payload, context) -> ClientMeters.cleared(payload.meter())));
+        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> {
+            var registrar = event.registrar("1");
+            registrar.playToClient(MeterPayload.TYPE, MeterPayload.STREAM_CODEC, (payload, context) -> ClientMeters.told(payload));
+            // Optional, so a client whose highest nested Runtime predates it still connects, and keeps the row (ADR-0002).
+            registrar.optional().playToClient(MeterClearPayload.TYPE, MeterClearPayload.STREAM_CODEC,
+                    (payload, context) -> ClientMeters.cleared(payload.meter()));
+        });
         modBus.addListener(FMLCommonSetupEvent.class, event -> Meter.close());
         NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> TOLD.remove(event.getEntity().getUUID()));
     }

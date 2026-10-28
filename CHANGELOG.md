@@ -4,7 +4,7 @@ Written for the Pillars: what a Pillar nesting the Runtime can use, or will see 
 
 ## Unreleased
 
-- A Pillar can take its meter off a player's HUD with `meter.clear(player)`, for a `ServerPlayer` on the server thread: the row is no longer drawn and the rows above it close up, until the meter is `set` for that player again. The Runtime tells only that player's client, in the new `atouchof:meter_clear` payload, and only if the meter was shown to them, so a Pillar may clear it every tick, as it may set it (#11).
+- A Pillar can take its meter off a player's HUD with `meter.clear(player)`, for a `ServerPlayer` on the server thread: the row is no longer drawn and the rows above it close up, until the meter is `set` for that player again. The Runtime tells only that player's client, in the new `atouchof:meter_clear` payload, and only if the meter was shown to them, so a Pillar may clear it every tick, as it may set it. The payload is optional: a client whose Runtime is 0.1.1 still connects, and keeps drawing a cleared row (#11).
 
 ## 0.1.1
 
