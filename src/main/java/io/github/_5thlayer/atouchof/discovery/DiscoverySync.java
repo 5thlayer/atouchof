@@ -35,7 +35,8 @@ public final class DiscoverySync {
     }
 
     public static void register(IEventBus modBus) {
-        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> event.registrar("1")
+        // Optional, so a client whose highest nested Runtime predates it still connects, and knows nothing (ADR-0002).
+        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> event.registrar("1").optional()
                 .playToClient(KnownPayload.TYPE, KnownPayload.STREAM_CODEC, (payload, context) -> ClientDiscovery.told(payload)));
         modBus.addListener(FMLCommonSetupEvent.class, event -> Discovery.close());
         // Posted for a joining player as they log in, and for everyone on a datapack reload.
