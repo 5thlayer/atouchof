@@ -35,8 +35,9 @@ Each Pillar must still play alone (ADR-0001), so none can call another.
   owns a mechanic, nor a stat:** a Pillar's stat, such as Sanity, is the Pillar's own player
   attachment. A Pillar registers its meter and sets what it shows (ADR-0005), and the Runtime only
   arranges and draws it, so a lone Pillar looks as if the Runtime were not there. **A Pillar nests
-  the Runtime only once it uses it**: A Touch of Wickedness draws no meter and raises no signal, so
-  it doesn't nest it yet (atouchofwickedness ADR 0002).
+  the Runtime only once it uses it**, for a meter, a signal or its Discovery record (ADR-0006). A
+  Touch of Wickedness nests it for Discovery alone and still draws no meter, so Wickedness stays
+  hidden (atouchofwickedness ADR 0002).
 - **The Runtime stays backward compatible within a major version.** Jar-in-jar loads the highest
   nested version, so an older Pillar runs against the newest Runtime in the pack.
 - **The Runtime and the Pillars build with the libworks plugin**, but they do not nest
@@ -54,3 +55,6 @@ suites would share a release line.
 Pillar, and Tough As Nails' API is the one named exception to vanilla state (#5). A Pillar may add
 optional entries to another's tag, and nests the Runtime only once it uses it (#6). The Runtime owns
 a meter's display data, not the stat (#4).
+
+**Amended** (2026-10-28). A Touch of Wickedness nests the Runtime for its Discovery record, so no
+Pillar is left that doesn't nest it (#13).
