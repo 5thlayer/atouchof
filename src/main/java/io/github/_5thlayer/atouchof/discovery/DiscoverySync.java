@@ -3,14 +3,12 @@
 
 package io.github._5thlayer.atouchof.discovery;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiConsumer;
 
+import io.github._5thlayer.atouchof.sync.Told;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -28,7 +26,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 public final class DiscoverySync {
 
     /** What each logged-in player's client was last told of each Pillar's things, kept from their join to their logout. */
-    private static final Map<UUID, Map<String, Set<String>>> TOLD = new HashMap<>();
+    private static final Told<String, Set<String>> TOLD = new Told<>();
     private static final List<BiConsumer<ServerPlayer, KnownPayload>> SEND_LISTENERS = new CopyOnWriteArrayList<>();
 
     private DiscoverySync() {
@@ -43,7 +41,7 @@ public final class DiscoverySync {
         NeoForge.EVENT_BUS.addListener(OnDatapackSyncEvent.class, event -> event.getRelevantPlayers()
                 .forEach(player -> Discovery.all().forEach(discovery -> tell(player, discovery))));
         NeoForge.EVENT_BUS.addListener(AdvancementEvent.AdvancementProgressEvent.class, DiscoverySync::progressed);
-        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> TOLD.remove(event.getEntity().getUUID()));
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> TOLD.forget(event.getEntity().getUUID()));
     }
 
     /** Adds a listener that hears of each payload sent to a player's client from now on, whether or not that client can receive it. */
@@ -54,8 +52,7 @@ public final class DiscoverySync {
     /** Tells the player's client what is known of the Pillar's things, if that differs from what it was last told. */
     static void tell(ServerPlayer player, Discovery discovery) {
         var known = discovery.known(player);
-        var told = TOLD.computeIfAbsent(player.getUUID(), id -> new HashMap<>());
-        if (known.equals(told.put(discovery.namespace(), known))) {
+        if (!TOLD.tell(player.getUUID(), discovery.namespace(), known)) {
             return;
         }
         var payload = new KnownPayload(discovery.namespace(), known);

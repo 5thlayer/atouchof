@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 5thlayer
 // SPDX-License-Identifier: LGPL-3.0-only
 
-package io.github._5thlayer.atouchof.meter;
+package io.github._5thlayer.atouchof.sync;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
