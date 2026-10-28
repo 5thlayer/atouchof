@@ -20,7 +20,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 /**
  * Two meters to look at in the dev client, drawn with vanilla's own sprites, since the Runtime has no
  * meter of its own. {@code /atouchof_meters} turns them on and off for the player who runs it: the
- * first sweeps its row, its three states and every trend band; the second stays half full and still.
+ * first sweeps its row, its three states and every trend band, and is cleared for 2 s of every 16, so
+ * the second, half full and still above it, drops into its place.
  */
 final class DevMeters {
 
@@ -51,6 +52,10 @@ final class DevMeters {
         event.getDispatcher().register(Commands.literal("atouchof_meters").executes(context -> {
             var player = context.getSource().getPlayerOrException();
             var on = SHOWN.add(player.getUUID()) || !SHOWN.remove(player.getUUID());
+            if (!on) {
+                sweeping.clear(player);
+                still.clear(player);
+            }
             context.getSource().sendSuccess(() -> Component.literal("Dev meters " + (on ? "on" : "off")), false);
             return 1;
         }));
@@ -63,7 +68,11 @@ final class DevMeters {
         // One half step every half second, across the row and back; the state and band move every 2 s.
         var ticks = player.tickCount;
         var step = (ticks / 10) % 40;
-        sweeping.set(player, step <= 20 ? step : 40 - step, (ticks / 40) % 3, (ticks / 40) % 7 - 3);
+        if ((ticks / 40) % 8 == 7) {
+            sweeping.clear(player);
+        } else {
+            sweeping.set(player, step <= 20 ? step : 40 - step, (ticks / 40) % 3, (ticks / 40) % 7 - 3);
+        }
         still.set(player, 10, 0, 0);
     }
 }

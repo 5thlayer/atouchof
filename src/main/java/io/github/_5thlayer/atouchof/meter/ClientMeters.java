@@ -10,7 +10,7 @@ import net.minecraft.resources.Identifier;
 
 /**
  * What this client was last told of each meter, for {@link MeterHud} to draw. A meter it has not been
- * told of is not drawn, and it forgets them all as its player leaves a world.
+ * told of, or was told to clear, is not drawn, and it forgets them all as its player leaves a world.
  */
 final class ClientMeters {
 
@@ -21,6 +21,10 @@ final class ClientMeters {
 
     static void told(MeterPayload payload) {
         TOLD.put(payload.meter(), payload);
+    }
+
+    static void cleared(Identifier meter) {
+        TOLD.remove(meter);
     }
 
     /** What the client was told of this meter, or null. */

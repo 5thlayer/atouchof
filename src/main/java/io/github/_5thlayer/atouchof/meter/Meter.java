@@ -19,7 +19,8 @@ import net.minecraft.server.level.ServerPlayer;
  * Runtime only receives what the meter shows, and computes nothing from it (ADR-0002).
  *
  * <p>A Pillar registers its meter while the mods are constructed, on both sides, so each client knows
- * its sprites, and sets it each tick for each player, on the server thread.
+ * its sprites, and sets it each tick for each player, on the server thread, or clears it for a player
+ * it should not show.
  */
 public final class Meter {
 
@@ -85,6 +86,15 @@ public final class Meter {
             throw new IllegalArgumentException("meter " + id + " was set a trend band of " + trend + ", outside ±" + TREND_LIMIT);
         }
         MeterSync.tell(player, new MeterPayload(id, MeterRow.halves(value, max), state, trend));
+    }
+
+    /**
+     * Stops drawing the meter for the player, as if it had never been set, so the rows above it close
+     * up, until it is set again. The Runtime tells the player's client only if it was drawing the meter,
+     * so a Pillar may clear it every tick.
+     */
+    public void clear(ServerPlayer player) {
+        MeterSync.clear(player, id);
     }
 
     public Identifier id() {
