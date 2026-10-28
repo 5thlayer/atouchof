@@ -9,7 +9,7 @@ reference for feel, never for numbers, names or art.
 
 **Runtime**:
 The small shared mod every Pillar nests, which arranges and draws the Pillars' meters, carries
-their Signals, and holds no mechanic of its own (ADR-0002).
+their Signals, keeps their Discovery records, and holds no mechanic of its own (ADR-0002, ADR-0006).
 _Avoid_: Core, base mod
 
 **Meter**:
@@ -25,6 +25,12 @@ many chevrons, up or down, and none at 0.
 What the Runtime carries from one Pillar to any other: that something happened to a player, such
 as a Strike, and nothing about what it costs, which each listener decides (ADR-0004).
 _Avoid_: hook, callback
+
+**Discovery**:
+A player's own learning of one thing of a Pillar's, the first time they meet it; until then the
+Pillar shows nothing of what that thing does. It is never shared between players. Each Pillar names
+its own discoverable things and what discovers each (ADR-0006).
+_Avoid_: unlock, research
 
 **Pillar**:
 One of the suite's mods, each owning one survival danger and playable alone in vanilla: A Touch of

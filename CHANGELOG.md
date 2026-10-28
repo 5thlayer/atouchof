@@ -4,6 +4,8 @@ Written for the Pillars: what a Pillar nesting the Runtime can use, or will see 
 
 ## Unreleased
 
+- Discovery, a Pillar's record of what each player has discovered of its things (ADR-0006). A Pillar registers its record from its mod constructor with `Discovery.register(modBus, namespace, ids, enabled)`. Each thing is the advancement `<namespace>:discovery/<id>`, under `<namespace>:discovery/root`, and is known once that advancement is done, or if it is missing; with `enabled` false, every thing is known. `discovery.isKnown(player, id)` answers on the server. The server tells only that player's client its known list, in the `atouchof:known` payload, on login, on a change to one of the record's advancements, on a datapack reload and on a reload of the Pillar's config, and only when it changed; `discovery.retell()` tells every client again after the switch flips some other way. `discovery.isKnownOnClient(id)` answers on the client, cheaply enough for every frame. The advancements, their triggers and what Discovery gates stay the Pillar's (#12).
+
 ## 0.1.2
 
 - A Pillar can take its meter off a player's HUD with `meter.clear(player)`, for a `ServerPlayer` on the server thread: the row is no longer drawn and the rows above it close up, until the meter is `set` for that player again. The Runtime tells only that player's client, in the new `atouchof:meter_clear` payload, and only if the meter was shown to them, so a Pillar may clear it every tick, as it may set it. The payload is optional: a client whose Runtime is 0.1.1 still connects, and keeps drawing a cleared row (#11).

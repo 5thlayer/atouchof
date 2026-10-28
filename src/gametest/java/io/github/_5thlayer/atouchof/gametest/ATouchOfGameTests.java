@@ -53,6 +53,7 @@ public final class ATouchOfGameTests {
     public static void register(IEventBus modBus) {
         TEST_TYPES.register(modBus);
         MeterSyncTests.listen();
+        DiscoveryTests.listen(modBus);
         DevMeters.register();
         // Posted only when game tests are enabled, which a production game never is.
         modBus.addListener(ATouchOfGameTests::registerTests);
@@ -62,6 +63,7 @@ public final class ATouchOfGameTests {
         var tests = new Registrar(event, event.registerEnvironment(id("default"), new TestEnvironmentDefinition.AllOf(List.of())));
         MeterSyncTests.register(tests);
         StrikeTests.register(tests);
+        DiscoveryTests.register(tests);
     }
 
     static Identifier id(String path) {
