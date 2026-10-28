@@ -3,10 +3,7 @@
 
 package io.github._5thlayer.atouchof.meter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiConsumer;
 
@@ -28,7 +25,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 public final class MeterSync {
 
     /** What each logged-in player's client was last told of each meter, kept from their join to their logout. */
-    private static final Map<UUID, Map<Identifier, MeterPayload>> TOLD = new HashMap<>();
+    private static final Told<Identifier, MeterPayload> TOLD = new Told<>();
     private static final List<BiConsumer<ServerPlayer, MeterPayload>> SEND_LISTENERS = new CopyOnWriteArrayList<>();
     private static final List<BiConsumer<ServerPlayer, Identifier>> CLEAR_LISTENERS = new CopyOnWriteArrayList<>();
 
@@ -44,7 +41,7 @@ public final class MeterSync {
                     (payload, context) -> ClientMeters.cleared(payload.meter()));
         });
         modBus.addListener(FMLCommonSetupEvent.class, event -> Meter.close());
-        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> TOLD.remove(event.getEntity().getUUID()));
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> TOLD.forget(event.getEntity().getUUID()));
     }
 
     /** Adds a listener that hears of each payload sent to a player's client from now on, whether or not that client can receive it. */
@@ -58,8 +55,7 @@ public final class MeterSync {
     }
 
     static void tell(ServerPlayer player, MeterPayload payload) {
-        var told = TOLD.computeIfAbsent(player.getUUID(), id -> new HashMap<>());
-        if (payload.equals(told.put(payload.meter(), payload))) {
+        if (!TOLD.tell(player.getUUID(), payload.meter(), payload)) {
             return;
         }
         SEND_LISTENERS.forEach(listener -> listener.accept(player, payload));
@@ -67,8 +63,7 @@ public final class MeterSync {
     }
 
     static void clear(ServerPlayer player, Identifier meter) {
-        var told = TOLD.get(player.getUUID());
-        if (told == null || told.remove(meter) == null) {
+        if (!TOLD.clear(player.getUUID(), meter)) {
             return;
         }
         CLEAR_LISTENERS.forEach(listener -> listener.accept(player, meter));
