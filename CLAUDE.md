@@ -1,6 +1,6 @@
 # A Touch Of
 
-The suite's home (see `README.md`), and the Runtime's: the small mod `atouchof` every Pillar nests jar-in-jar, which draws the Pillars' meters and holds no mechanic (ADR-0002, ADR-0005). Its mod project is the repo root, built with the libworks convention plugin like a Pillar.
+The Runtime: the small mod `atouchof` every Pillar nests jar-in-jar, which draws the Pillars' meters and holds no mechanic (ADR-0002, ADR-0005). Its mod project is the repo root, built with the libworks convention plugin like a Pillar.
 
 ## Workflow
 
@@ -49,13 +49,9 @@ Issues live in this repo's GitHub Issues. See `docs/agents/issue-tracker.md`.
 
 The five canonical triage roles, used verbatim as label strings. See `docs/agents/triage-labels.md`.
 
-### Rejected scope
-
-`.out-of-scope/` holds one file per rejected enhancement. See `.out-of-scope/README.md`.
-
 ### Domain docs
 
-Single-context: `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+The suite's glossary, its ADRs (cited as "A Touch Of ADR-NNNN", or "ADR-NNNN" here) and its rejected scope are in the private Home Repo, `~/5thlayer/home/atouchof/`, with the suite's rules in its `AGENTS.md`. Read them there; this repo has no `GLOSSARY.md` or `docs/adr/` of its own.
 
 ### Testing policy
 
@@ -68,9 +64,3 @@ code, or a choice a reader would otherwise undo. Write the minimum that explains
 ADR or ticket that holds the reasoning, e.g. `(ADR-0002)`. Obvious code gets no comment. Keep
 history, rejected alternatives, how a test was verified, and restatements of the code out of
 comments.
-
-### Don't Starve
-
-Don't Starve is the reference for feel, never for numbers, names or art (ADR-0001). Do not look up,
-copy or cite Klei's data files, stat values or asset names. Describe a mechanic in the suite's own
-words and give it the suite's own numbers.

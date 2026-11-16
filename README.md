@@ -22,12 +22,8 @@ Madness reads light level, not because the two mods know each other.
 
 ## This repository
 
-This is the suite's home: the shared vocabulary, the decisions that touch more than one Pillar,
-and the parent issue of every cross-Pillar topic.
-
-- The vocabulary is in [GLOSSARY.md](GLOSSARY.md), and the decisions are in [docs/adr](docs/adr).
-- A bug or idea for one Pillar goes on that Pillar's tracker. One that spans several goes here.
-- The Runtime, `atouchof`, the small mod every Pillar nests, is built here, from the repo root.
+This repository builds the Runtime, `atouchof`, the small mod every Pillar nests, from the repo root.
+A bug or idea for the Runtime goes on this tracker; one for a single Pillar goes on that Pillar's.
 
 ## Licence
 
