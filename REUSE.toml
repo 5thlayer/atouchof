@@ -36,13 +36,6 @@ path = [
 SPDX-FileCopyrightText = "2026 5thlayer"
 SPDX-License-Identifier = "CC-BY-4.0"
 
-# The agent skills, from mattpocock/skills.
-[[annotations]]
-path = [".agents/**", ".claude/skills", ".gitmodules"]
-precedence = "override"
-SPDX-FileCopyrightText = "Matt Pocock"
-SPDX-License-Identifier = "MIT"
-
 # The Gradle wrapper is Gradle's.
 [[annotations]]
 path = ["gradlew", "gradlew.bat", "gradle/wrapper/**"]

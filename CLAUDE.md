@@ -6,7 +6,7 @@ The Runtime: the small mod `atouchof` every Pillar nests jar-in-jar, which draws
 
 Commit on the current branch; open a feature branch only when the user asks for one. Nothing is pushed without the user's word.
 
-A change to the Runtime's behaviour gets a review with the `code-review` skill (below). Doc and plumbing changes skip it: `CLAUDE.md`, `GLOSSARY.md`, ADRs, `docs/`, `.claude/`, submodule bumps, and tooling or CI config.
+A change to the Runtime's behaviour gets a review with the `code-review` skill (below). Doc and plumbing changes skip it: `CLAUDE.md`, `GLOSSARY.md`, ADRs, `docs/`, `.claude/`, and tooling or CI config.
 
 ## Commits
 
@@ -28,17 +28,15 @@ A change a Pillar can use or will notice adds its line under `## Unreleased` in 
 
 ## Agent skills
 
-The skills are mattpocock/skills, a git submodule at `.agents/mattpocock-skills` pinned to a release
-tag. Upstream nests them by category, and Claude Code reads only `.claude/skills/<name>/SKILL.md`.
-So `.agents/skills/<name>` is a symlink into the submodule for each skill the repo uses, and
-`.claude/skills` is a symlink to `.agents/skills`. A fresh clone needs `git submodule update --init`,
-or the links dangle. Every session runs it from `.claude/hooks/session-start.sh`. To take a new
-release, check out its tag in the submodule and commit it. Then check that every
-`.claude/skills/*/SKILL.md` still resolves, because a skill moved upstream breaks its link.
+The skills are mattpocock/skills, as the `mattpocock-skills` plugin from upstream's own marketplace,
+which follows its latest release, and the skillworks plugin. `.claude/settings.json` enables both, so
+a session here, in a worktree or in the cloud gets them with nothing vendored. The plugin also brings
+`implement` and `diagnosing-bugs`: use skillworks' ones, `skillworks:implement` and
+`skillworks:diagnosing-bugs`.
 
 ### Code review
 
-Review code only with the mattpocock `code-review` skill (`.claude/skills/code-review/`). Never use
+Review code only with the mattpocock `code-review` skill (`/mattpocock-skills:code-review`). Never use
 Claude Code's built-in `/code-review`, `/review`, `/security-review` or `/simplify` in its place.
 
 ### Issue tracker
